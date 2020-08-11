@@ -10,6 +10,8 @@ const datetime = require('./library/datetime');
 const schema = require('./library/checkSchema');
 
 const request = require('request');
+const topicconfig = require('./library/topicconfig');
+
 
 app.listen(8204, function () {
     console.log('app listening on port 8204!');
@@ -35,8 +37,8 @@ app.post('/checksubscribe', async function (req, res) {
     if (await schema.checkSchema(req, res, dtf, "checksubscribe")) {
         ;
 
-        var TOPIC = 'VISAGAME001';
-        var CHANNEL = 'Mobile';
+        var TOPIC =  topicconfig.TOPIC;
+        var CHANNEL = topicconfig.CHANNEL;
 
         // insert transaction to as400
         let transaction = await insert_transaction.insert(res, req, dtf, TOPIC, CHANNEL);
